@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+</head>
+
+
+<body style="font-family: Arial, sans-serif;" dir="rtl">
+
+    <h1>Fix Garbled Arabic</h1>
+
+
+        <p><label for="garbled_arabic">Garbled Arabic - Paste your garbled Arabic here:</label></p>
+        <textarea id="garbled_arabic" name="gabrbled_arabic" rows="10" cols="50" onChange="fix_garbled_arabic()">
+            ÇáÚÌæÒ æÇáãäÔÇÑ
+        </textarea>
+        <br>
+        
+      <p id="fixed_arabic"></p>
+<button type="submit" value="Submit" onClick="fix_garbled_arabic()">Fix Garbled Arabic</button>
+   
+
+<script>
+	function fix_garbled_arabic(){
+		var str = document.getElementById("garbled_arabic").value;
+		 const myUint8Array = new Uint8Array(str.length);
+		 
+		  for (i = 0; i < str.length; i++) {
+			 myUint8Array[i]=str.charCodeAt(i) 
+			} 
+			const win1256decoder = new TextDecoder( "windows-1256");
+		var fixed_arabic = win1256decoder.decode(myUint8Array);
+ 		   console.log(fixed_arabic);
+ 		   
+ 		   //document.getElementById("fixed_arabic").value = fixed_arabic;
+ 		   
+ 		   document.getElementById("fixed_arabic").innerHTML = "<pre style='font-family: Arial, sans-serif;'>"+fixed_arabic+"</pre>";
+	} 
+</script>
+</body>
+
+</html>
